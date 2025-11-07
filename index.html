@@ -847,8 +847,32 @@ void loop()
       successMessage.scrollIntoView({ behavior: 'smooth' });
     }
 
+    function submitWithXHR(endpoint, formData) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', endpoint);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              resolve(JSON.parse(xhr.responseText || '{}'));
+            } catch (error) {
+              resolve({});
+            }
+          } else {
+            reject(new Error('Request failed'));
+          }
+        };
+        xhr.onerror = function() {
+          reject(new Error('Network error'));
+        };
+        xhr.send(formData);
+      });
+    }
+
     // Format message before submission for email (without altering visible form fields)
     feedbackForm.addEventListener('submit', function(e) {
+      e.preventDefault();
       const categoryField = document.getElementById('category');
       const messageField = document.getElementById('message');
       const nameField = document.getElementById('name');
@@ -864,7 +888,6 @@ void loop()
 
       if (window.location.protocol === 'file:') {
         // Fall back to mailto when opened directly from the filesystem
-        e.preventDefault();
         const subject = encodeURIComponent(`Portfolio Feedback: ${category}`);
         const mailBody = encodeURIComponent(
           `Name: ${name}\nEmail: ${email}\nCategory: ${category}\n\nMessage:\n${originalMessage}`
@@ -877,26 +900,30 @@ void loop()
           submitBtn.disabled = false;
           showSuccess();
         }, 600);
-      } else {
-        e.preventDefault();
-        setStatus('success', 'Sending your message...');
+        return;
+      }
 
-        const formData = new FormData(feedbackForm);
-        const ajaxEndpoint = feedbackForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      setStatus('success', 'Sending your message...');
 
-        fetch(ajaxEndpoint, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-          },
-          body: formData
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      const formData = new FormData(feedbackForm);
+      const ajaxEndpoint = feedbackForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+      const ajaxPromise = window.fetch
+        ? fetch(ajaxEndpoint, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: formData
+          }).then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+        : submitWithXHR(ajaxEndpoint, formData);
+
+      ajaxPromise
         .then(() => {
           submitBtn.innerHTML = defaultSubmitHTML;
           submitBtn.disabled = false;
@@ -908,7 +935,6 @@ void loop()
           submitBtn.disabled = false;
           setStatus('error', 'Something went wrong while sending your message. Please try again.');
         });
-      }
     });
 
     // Auto-show success if redirected back with ?sent=true
