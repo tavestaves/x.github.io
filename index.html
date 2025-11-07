@@ -320,6 +320,21 @@
       font-style: italic;
     }
     
+    .form-status {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .form-status.error {
+      color: #ff6f61;
+    }
+
+    .form-status.success {
+      color: #00ff9d;
+    }
+
     .success-message {
       display: none;
       background: rgba(0, 255, 157, 0.1);
@@ -763,6 +778,7 @@ void loop()
       </button>
       
       <p class="form-note">Your message will be sent directly to mrteverah@gmail.com. I'll get back to you soon!</p>
+      <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
     </form>
     
     <div id="successMessage" class="success-message">
@@ -782,6 +798,7 @@ void loop()
         <button type="button" class="success-btn">Send another message</button>
       </div>
     `;
+    const statusMessage = document.getElementById('formStatus');
 
     // Show notice when running from the file system
     if (window.location.protocol === 'file:') {
@@ -794,6 +811,19 @@ void loop()
       notice.style.marginTop = '20px';
       notice.style.color = '#ffb3a9';
       document.querySelector('.feedback-intro').appendChild(notice);
+    }
+
+    function setStatus(type, message) {
+      if (!message) {
+        statusMessage.style.display = 'none';
+        statusMessage.textContent = '';
+        statusMessage.className = 'form-status';
+        return;
+      }
+
+      statusMessage.style.display = 'block';
+      statusMessage.textContent = message;
+      statusMessage.className = `form-status ${type}`;
     }
 
     function showSuccess() {
@@ -809,6 +839,7 @@ void loop()
           feedbackForm.style.display = 'block';
           submitBtn.innerHTML = defaultSubmitHTML;
           submitBtn.disabled = false;
+          setStatus('', '');
           window.scrollTo({ top: feedbackForm.offsetTop - 80, behavior: 'smooth' });
         });
       }
@@ -846,8 +877,38 @@ void loop()
           submitBtn.disabled = false;
           showSuccess();
         }, 600);
+      } else {
+        e.preventDefault();
+        setStatus('success', 'Sending your message...');
+
+        const formData = new FormData(feedbackForm);
+        const ajaxEndpoint = feedbackForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+        fetch(ajaxEndpoint, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(() => {
+          submitBtn.innerHTML = defaultSubmitHTML;
+          submitBtn.disabled = false;
+          setStatus('', '');
+          showSuccess();
+        })
+        .catch(() => {
+          submitBtn.innerHTML = defaultSubmitHTML;
+          submitBtn.disabled = false;
+          setStatus('error', 'Something went wrong while sending your message. Please try again.');
+        });
       }
-      // Otherwise, let FormSubmit handle the POST + redirect
     });
 
     // Auto-show success if redirected back with ?sent=true
