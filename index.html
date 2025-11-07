@@ -154,6 +154,189 @@
     .project-details ul {
       padding-left: 20px;
     }
+    
+    .feedback-section {
+      margin-top: 4em;
+      padding: 30px;
+      background: linear-gradient(135deg, #2a2a3f 0%, #1f1f30 100%);
+      border-radius: 20px;
+      border: 2px solid #00ff9d;
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feedback-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 157, 0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feedback-header h2 {
+      border: none;
+      margin-top: 0;
+      font-size: 2rem;
+      text-shadow: 0 0 15px #00ff9d;
+    }
+    
+    .feedback-intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #dcdcdc;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feedback-intro strong {
+      color: #00ff9d;
+      font-size: 1.2rem;
+    }
+    
+    .feedback-form {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      color: #00d4ff;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      background: #1a1a2f;
+      border: 2px solid #2a2a3f;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #00ff9d;
+      box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+      background: #1f1f30;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, #00ff9d 0%, #00d4ff 100%);
+      color: #1a1a2f;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin: 30px auto 0;
+      box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .submit-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(-1px);
+    }
+    
+    .submit-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .form-note {
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-top: 15px;
+      font-style: italic;
+    }
+    
+    .success-message {
+      display: none;
+      background: rgba(0, 255, 157, 0.1);
+      border: 2px solid #00ff9d;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      color: #00ff9d;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -457,6 +640,137 @@ void loop()
       <li><a href="mailto:mrteverah@gmail.com">Email</a></li>
     </ul>
   </div>
+
+  <div class="feedback-section">
+    <div class="feedback-header">
+      <h2>💡 Let's Build Something Amazing Together!</h2>
+    </div>
+    <div class="feedback-intro">
+      <p><strong>Your ideas matter!</strong> I'm always looking for new challenges and exciting projects to work on. Whether you have:</p>
+      <ul style="text-align: left; display: inline-block; margin-top: 15px;">
+        <li>💼 <strong>Project suggestions</strong> – What should I build next?</li>
+        <li>🤔 <strong>Questions</strong> – Curious about embedded systems, PCBs, or firmware?</li>
+        <li>🚀 <strong>Collaboration ideas</strong> – Want to work together on something cool?</li>
+        <li>🎯 <strong>Technical challenges</strong> – Need assistance with your own projects?</li>
+      </ul>
+      <p style="margin-top: 20px;">I'd love to hear from you! Your feedback helps me grow and create better solutions. <strong>Every message is valuable!</strong></p>
+    </div>
+    
+    <form id="feedbackForm" class="feedback-form" action="https://formsubmit.co/mrteverah@gmail.com" method="POST">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="category">What would you like to share?</label>
+        <select id="category" name="category" required>
+          <option value="">Select an option...</option>
+          <option value="project-suggestion">💡 Project Suggestion - What should I build next?</option>
+          <option value="question">❓ Question - I have a technical question</option>
+          <option value="collaboration">🤝 Collaboration - Let's work together!</option>
+          <option value="assistance">🆘 Assistance - I need help with my project</option>
+          <option value="feedback">💬 General Feedback - Just want to say hi!</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Share your thoughts, ideas, questions, or suggestions here... Be as detailed as you'd like! 😊" required></textarea>
+      </div>
+      
+      <input type="hidden" name="_subject" value="New Feedback from Portfolio Website">
+      <input type="hidden" name="_next" value="">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      
+      <button type="submit" class="submit-btn">
+        <span>🚀 Send Message</span>
+      </button>
+      
+      <p class="form-note">Your message will be sent directly to mrteverah@gmail.com. I'll get back to you soon!</p>
+    </form>
+    
+    <div id="successMessage" class="success-message">
+      <strong>✨ Thank you!</strong> Your message has been sent successfully. I'll get back to you as soon as possible!
+    </div>
+  </div>
+
+  <script>
+    // Handle form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = this;
+      const formData = new FormData(form);
+      const submitBtn = form.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      
+      // Format the message to include category
+      const category = formData.get('category');
+      const originalMessage = formData.get('message');
+      const name = formData.get('name');
+      const email = formData.get('email');
+      
+      // Create formatted message
+      const formattedMessage = `Category: ${category}\n\nFrom: ${name} (${email})\n\nMessage:\n${originalMessage}`;
+      formData.set('message', formattedMessage);
+      
+      // Update button to show loading state
+      submitBtn.innerHTML = '<span>⏳ Sending...</span>';
+      submitBtn.disabled = true;
+      
+      // Submit to FormSubmit
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          // Success - show success message
+          form.style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          
+          // Scroll to success message
+          document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // If FormSubmit fails, use mailto as fallback
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(error => {
+        // Fallback: Use mailto as backup
+        const subject = encodeURIComponent(`Portfolio Feedback: ${category}`);
+        const body = encodeURIComponent(
+          `Name: ${name}\n` +
+          `Email: ${email}\n` +
+          `Category: ${category}\n\n` +
+          `Message:\n${originalMessage}`
+        );
+        
+        window.location.href = `mailto:mrteverah@gmail.com?subject=${subject}&body=${body}`;
+        
+        // Show success message after a delay
+        setTimeout(() => {
+          form.style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 500);
+      })
+      .finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      });
+    });
+  </script>
 
 </body>
 </html>
