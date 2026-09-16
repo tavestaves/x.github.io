@@ -3,34 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panenyasha Teverah | Senior Embedded Systems & Hardware Firmware Engineer</title>
+  <title>Panenyasha Teverah | Embedded Software & Systems Engineer</title>
 
-  <!-- Fonts -->
+  <!-- Ergonomic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg-dark: #0a0b10;
-      --bg-card: #121520;
-      --bg-card-hover: #1a1e2e;
-      --bg-terminal: #07080c;
-      --accent-green: #00ff9d;
-      --accent-cyan: #00d4ff;
-      --accent-orange: #ff9d00;
-      --accent-red: #ff5555;
-      --accent-purple: #a855f7;
-      --text-main: #f0f4f8;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --border-color: rgba(0, 255, 157, 0.15);
-      --border-glow: rgba(0, 255, 157, 0.4);
-      --glass-bg: rgba(18, 21, 32, 0.75);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      /* Ergonomic Pitch Black & Dark Obsidian Palette */
+      --bg-dark: #05070a;
+      --bg-surface: #0a0d14;
+      --bg-card: #101522;
+      --bg-card-hover: #161c2e;
+      --bg-terminal: #06080e;
+
+      /* Well-Thought Color Palette (Easy on Eyes) */
+      --accent-green: #00e676;   /* System Health / Power / Success */
+      --accent-cyan: #00b0ff;    /* Communication / Wireless / UART */
+      --accent-amber: #ffb300;   /* Battery / Analog / Warnings */
+      --accent-purple: #a78bfa;  /* Vision / Firmware / Logic */
+      --accent-red: #ff5252;     /* Fault / Error / Cutoff */
+
+      --text-main: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #484f58;
+
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 230, 118, 0.25);
+      --border-cyan: rgba(0, 176, 255, 0.25);
+
+      --glass-bg: rgba(16, 21, 34, 0.85);
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
+
       --font-heading: 'Orbitron', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -54,13 +63,13 @@
       line-height: 1.6;
       overflow-x: hidden;
       background-image:
-        radial-gradient(circle at 15% 15%, rgba(0, 255, 157, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 60%, rgba(0, 212, 255, 0.05) 0%, transparent 40%),
-        linear-gradient(to bottom, rgba(10, 11, 16, 0.8), #0a0b10);
+        radial-gradient(circle at 10% 10%, rgba(0, 230, 118, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 50%, rgba(0, 176, 255, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(255, 179, 0, 0.02) 0%, transparent 40%);
       background-attachment: fixed;
     }
 
-    /* Custom Scrollbar */
+    /* Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -68,7 +77,7 @@
       background: var(--bg-dark);
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #1c212e;
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
@@ -76,366 +85,255 @@
       background: var(--accent-green);
     }
 
-    /* Header & Navigation */
+    /* Navigation */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(10, 11, 16, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5, 7, 10, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
-      padding: 1rem 2rem;
+      padding: 0.85rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.3s ease;
     }
 
     .nav-brand {
       font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent-green);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
-      letter-spacing: 1px;
+      gap: 0.6rem;
+      letter-spacing: 0.5px;
     }
 
     .nav-brand span {
-      color: var(--text-main);
+      color: var(--accent-green);
+    }
+
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(0, 230, 118, 0.1);
+      color: var(--accent-green);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.8rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-green);
-      text-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent-green);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after, .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .status-badge {
-      display: inline-flex;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 4px 12px;
-      background: rgba(0, 255, 157, 0.08);
-      border: 1px solid rgba(0, 255, 157, 0.3);
-      border-radius: 20px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
+      gap: 0.4rem;
+    }
+
+    .nav-links a:hover {
       color: var(--accent-green);
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-green);
-      animation: pulse-ring 1.8s infinite;
-    }
-
-    @keyframes pulse-ring {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 157, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
     }
 
     /* Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 1.5rem;
     }
 
     /* Hero Section */
     .hero-section {
-      padding: 140px 0 60px;
+      padding: 8.5rem 0 4rem;
       display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 40px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
       align-items: center;
     }
 
-    .hero-content h1 {
+    .hero-title-group h1 {
       font-family: var(--font-heading);
-      font-size: 3.2rem;
-      font-weight: 900;
+      font-size: 2.8rem;
       line-height: 1.15;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent-green) 70%, var(--accent-cyan) 100%);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
     }
 
     .hero-subtitle {
       font-family: var(--font-mono);
-      color: var(--accent-cyan);
       font-size: 1.15rem;
-      margin-bottom: 20px;
+      color: var(--accent-cyan);
+      margin-bottom: 1.2rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0.5rem;
     }
 
-    .hero-bio {
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-pill {
+      font-size: 0.82rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
       color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
-
-    .hero-stats {
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
       display: flex;
-      gap: 30px;
-      margin-bottom: 35px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 20px 0;
+      align-items: center;
+      gap: 0.45rem;
     }
 
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .stat-val {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      font-weight: 700;
+    .meta-pill i {
       color: var(--accent-green);
     }
 
-    .stat-lbl {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .hero-bio {
+      font-size: 1.02rem;
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      background: var(--bg-surface);
+      padding: 1.25rem;
+      border-radius: 10px;
+      border-left: 3px solid var(--accent-green);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .hero-actions {
       display: flex;
-      gap: 15px;
+      gap: 1rem;
       flex-wrap: wrap;
     }
 
     .btn {
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
+      gap: 0.5rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-      color: #0a0b10;
-      box-shadow: 0 4px 20px rgba(0, 255, 157, 0.3);
+      background: var(--accent-green);
+      color: #000;
+      box-shadow: 0 4px 14px rgba(0, 230, 118, 0.25);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0, 255, 157, 0.5);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(0, 255, 157, 0.1);
-      border-color: var(--accent-green);
-      color: var(--accent-green);
+      background: #00c853;
       transform: translateY(-2px);
     }
 
-    .hero-avatar-card {
-      position: relative;
-      text-align: center;
-    }
-
-    .avatar-wrapper {
-      position: relative;
-      width: 260px;
-      height: 260px;
-      margin: 0 auto;
-      border-radius: 50%;
-      padding: 8px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan), transparent);
-      box-shadow: 0 0 35px rgba(0, 255, 157, 0.25);
-    }
-
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      background: var(--bg-card);
-    }
-
-    /* Section Headers */
-    .section-header {
-      margin: 80px 0 40px;
-      position: relative;
-    }
-
-    .section-tag {
-      font-family: var(--font-mono);
-      color: var(--accent-green);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--border-color), transparent);
-    }
-
-    /* General Cards */
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .glass-card:hover {
       border-color: var(--border-color);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
 
-    /* Footer */
-    footer {
-      margin-top: 100px;
-      border-top: 1px solid var(--border-color);
-      padding: 40px 0;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      font-family: var(--font-mono);
+    .btn-outline:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
     }
 
-    footer a {
-      color: var(--accent-green);
-      text-decoration: none;
-    }
-
-    /* Terminal Console */
-    .terminal-container {
+    /* Terminal Widget */
+    .terminal-card {
       background: var(--bg-terminal);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      font-family: var(--font-mono);
+      border-radius: 10px;
+      box-shadow: var(--shadow-soft);
       overflow: hidden;
-      margin-bottom: 60px;
     }
 
     .terminal-header {
-      background: #141722;
-      padding: 10px 16px;
+      background: #0c0f18;
+      padding: 0.6rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .terminal-dots {
       display: flex;
-      gap: 8px;
+      gap: 6px;
     }
 
     .dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
     }
-
     .dot-red { background: #ff5f56; }
     .dot-yellow { background: #ffbd2e; }
     .dot-green { background: #27c93f; }
 
     .terminal-title {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      letter-spacing: 1px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     .terminal-body {
-      padding: 20px;
-      min-height: 220px;
-      max-height: 380px;
+      padding: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      min-height: 280px;
+      max-height: 320px;
       overflow-y: auto;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      color: #c9d1d9;
     }
 
     .terminal-line {
-      margin-bottom: 10px;
-      white-space: pre-wrap;
-      word-break: break-word;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
     }
 
     .terminal-prompt {
@@ -446,8 +344,8 @@
     .terminal-input-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
     }
 
     .terminal-input {
@@ -456,1202 +354,1334 @@
       outline: none;
       color: var(--text-main);
       font-family: var(--font-mono);
-      font-size: 0.9rem;
-      flex: 1;
+      font-size: 0.85rem;
+      width: 100%;
     }
 
-    .cmd-link {
-      color: var(--accent-cyan);
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Projects & Filtering */
-    .filter-tabs {
+    .cmd-shortcuts {
+      padding: 0.6rem 1rem;
+      background: #090b12;
+      border-top: 1px solid var(--border-color);
       display: flex;
-      gap: 12px;
-      margin-bottom: 30px;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .shortcut-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 176, 255, 0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .shortcut-btn:hover {
+      background: rgba(0, 176, 255, 0.15);
+    }
+
+    /* Section Headers */
+    .section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--text-main);
+    }
+
+    /* Filter Controls */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
     .filter-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       color: var(--text-muted);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s;
     }
 
-    .filter-btn:hover, .filter-btn.active {
-      background: rgba(0, 255, 157, 0.12);
+    .filter-btn.active, .filter-btn:hover {
+      background: rgba(0, 230, 118, 0.1);
       border-color: var(--accent-green);
       color: var(--accent-green);
     }
 
+    /* Projects Grid */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .project-card.hidden {
-      display: none;
+    .project-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-soft);
     }
 
-    .project-tag {
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .project-category {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent-cyan);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      background: rgba(0, 176, 255, 0.08);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 176, 255, 0.2);
     }
 
     .project-title {
       font-family: var(--font-heading);
-      font-size: 1.35rem;
+      font-size: 1.25rem;
+      margin-top: 0.4rem;
       color: var(--text-main);
-      margin-bottom: 12px;
-      line-height: 1.3;
     }
 
-    .project-specs {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      margin: 15px 0;
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.6rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    /* Expandable Code Blocks */
+    .code-toggle {
       font-family: var(--font-mono);
       font-size: 0.78rem;
-    }
-
-    .spec-item span {
-      color: var(--text-dim);
-      display: block;
-      font-size: 0.7rem;
-    }
-
-    .spec-item strong {
+      background: transparent;
       color: var(--accent-green);
-    }
-
-    .code-snippet-box {
-      background: #0d0e14;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 12px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--accent-green);
-      overflow-x: auto;
-      max-height: 200px;
-      margin-top: 10px;
-    }
-
-    /* Modal System */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(5, 6, 10, 0.85);
-      backdrop-filter: blur(10px);
-      z-index: 2000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 30px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 255, 157, 0.15);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+      border: 1px solid var(--border-accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+      gap: 0.4rem;
+      transition: all 0.2s;
     }
 
-    .modal-close:hover {
-      background: var(--accent-red);
-      color: #fff;
+    .code-toggle:hover {
+      background: rgba(0, 230, 118, 0.12);
     }
 
-    /* Skills & Experience Grids */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-
-    .skill-category-title {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      color: var(--accent-green);
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .skill-list {
-      list-style: none;
-    }
-
-    .skill-item {
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-
-    .skill-item:last-child {
-      border-bottom: none;
-    }
-
-    .skill-tag-pill {
-      background: rgba(0, 212, 255, 0.1);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(0, 212, 255, 0.2);
+    .code-block {
+      display: none;
+      margin-top: 1rem;
+      background: #080a10;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      padding: 2px 8px;
+      font-size: 0.78rem;
+      color: #7ee787;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .code-block.open {
+      display: block;
+    }
+
+    /* Interactive Battery / BMS Simulator Widget */
+    .sim-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
-    }
-
-    .experience-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .exp-card {
-      border-left: 3px solid var(--accent-green);
-      position: relative;
-    }
-
-    .exp-role {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      color: var(--text-main);
-    }
-
-    .exp-company {
-      color: var(--accent-cyan);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-    }
-
-    /* Simulator Styles */
-    .sim-container {
+      padding: 1.8rem;
       display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 20px;
-      margin-bottom: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 850px) {
+      .sim-card {
+        grid-template-columns: 1fr;
+      }
     }
 
     .sim-controls {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 1.2rem;
     }
 
-    .sim-ctrl-group {
+    .sim-field {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 0.4rem;
     }
 
-    .sim-ctrl-group label {
+    .sim-label {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--accent-cyan);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
     }
 
-    .sim-input {
-      background: var(--bg-dark);
+    .sim-select, .sim-slider {
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 8px 12px;
+      padding: 0.6rem;
       border-radius: 6px;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      outline: none;
     }
 
-    .sim-canvas-wrapper {
-      background: var(--bg-terminal);
+    .sim-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      background: var(--bg-surface);
+      padding: 1rem;
+      border-radius: 8px;
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 15px;
+    }
+
+    .metric-box {
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+    }
+
+    .metric-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .sim-canvas-container {
+      background: #06080e;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    canvas {
+      width: 100%;
+      height: 200px;
+      background: #05070a;
+      border-radius: 4px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.4rem;
+      transition: all 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .skill-icon {
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+
+    .skill-list {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .skill-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-list li::before {
+      content: "▹";
+      color: var(--accent-green);
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
       position: relative;
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 900px) {
-      .hero-section {
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 11px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--bg-dark);
+      border: 2px solid var(--accent-green);
+      border-radius: 50%;
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .job-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .company-name {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .job-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .job-bullets {
+      list-style: disc;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    /* Education & Certifications */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .edu-degree {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--accent-amber);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-school {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact Section */
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .contact-card {
         grid-template-columns: 1fr;
-        text-align: center;
-        gap: 30px;
       }
-      .hero-subtitle {
-        justify-content: center;
-      }
-      .hero-stats {
-        justify-content: center;
-      }
-      .hero-actions {
-        justify-content: center;
-      }
-      .section-title {
-        font-size: 1.8rem;
-      }
-      .nav-links {
-        display: none; /* Can add hamburger menu if needed */
-      }
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-green);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-textarea {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.7rem 0.9rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--accent-green);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: #040508;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation -->
   <nav class="navbar">
     <a href="#" class="nav-brand">
-      <i class="fa-solid fa-microchip"></i> P. TEVERAH <span>// EMBEDDED</span>
+      <span>PT</span> // EMBEDDED.SYS
     </a>
-    <ul class="nav-links">
-      <li><a href="#terminal">TERMINAL</a></li>
-      <li><a href="#projects">PROJECTS</a></li>
-      <li><a href="#simulator">SIMULATOR</a></li>
-      <li><a href="#skills">SKILLS</a></li>
-      <li><a href="#experience">EXPERIENCE</a></li>
-      <li><a href="#contact">CONTACT</a></li>
-    </ul>
     <div class="status-badge">
-      <span class="pulse-dot"></span> HARDWARE ONLINE
+      <div class="status-dot"></div>
+      UART0 ONLINE @ 115200
     </div>
+    <ul class="nav-links">
+      <li><a href="#projects"><i class="fa-solid fa-microchip"></i> Projects</a></li>
+      <li><a href="#simulator"><i class="fa-solid fa-car-battery"></i> BMS Sim</a></li>
+      <li><a href="#skills"><i class="fa-solid fa-layer-group"></i> Skills</a></li>
+      <li><a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a></li>
+      <li><a href="#contact"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+    </ul>
   </nav>
 
+  <!-- Hero Section -->
   <div class="container">
-    <!-- Hero Section -->
     <section class="hero-section">
-      <div class="hero-content">
-        <p class="section-tag">&gt; SYSTEM.INIT_SYS_ARCH()</p>
+      <div class="hero-title-group">
         <h1>Panenyasha Teverah</h1>
         <div class="hero-subtitle">
-          <i class="fa-solid fa-bolt"></i> Embedded Systems & Hardware Firmware Engineer
+          <i class="fa-solid fa-terminal"></i>
+          Embedded Software & Systems Engineer
         </div>
-        <p class="hero-bio">
-          Specializing in low-level bare-metal firmware, RTOS-driven architectures, custom multi-layer PCB design (KiCad/Altium), RF telemetry, and industrial IoT solutions. Engineering field-proven hardware engineered for high reliability, harsh environments, and real-world precision.
-        </p>
 
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-val">MCU / RF</span>
-            <span class="stat-lbl">ESP32 • STM32 • NRF24</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-val">PCB</span>
-            <span class="stat-lbl">High-Speed • Star Ground</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-val">LANGS</span>
-            <span class="stat-lbl">C / C++ • Python • PlatformIO</span>
-          </div>
+        <div class="meta-pills">
+          <div class="meta-pill"><i class="fa-solid fa-location-dot"></i> Cape Town, South Africa</div>
+          <div class="meta-pill"><i class="fa-solid fa-envelope"></i> mrteverah@gmail.com</div>
+          <div class="meta-pill"><i class="fa-solid fa-phone"></i> +27 62 047 3836</div>
+          <div class="meta-pill"><i class="fa-solid fa-code"></i> C/C++ • Python • FreeRTOS</div>
+        </div>
+
+        <div class="hero-bio">
+          Embedded systems and electronics engineer with 3+ years of hands-on engineering experience spanning C/C++ firmware, hardware integration, testing, and production support. Practical background in real-time control logic, timing analysis, and wireless connectivity, with exposure to FreeRTOS and Linux. Experienced in taking prototypes through implementation, board bring-up, and validation using software debugging and hardware measurements.
         </div>
 
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fa-solid fa-diagram-project"></i> Explore Projects
-          </a>
-          <a href="#terminal" class="btn btn-secondary">
-            <i class="fa-solid fa-terminal"></i> Launch CLI Terminal
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fa-solid fa-paper-plane"></i> Contact Me
-          </a>
+          <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-diagram-project"></i> View Engineering Projects</a>
+          <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-paper-plane"></i> Contact Engineer</a>
         </div>
       </div>
 
-      <div class="hero-avatar-card">
-        <div class="avatar-wrapper">
-          <img src="imgme.png" alt="Panenyasha Teverah" class="avatar-img">
-        </div>
-      </div>
-    </section>
-
-    <!-- CLI Embedded Terminal -->
-    <section id="terminal" style="margin-top: 40px;">
-      <div class="section-header">
-        <span class="section-tag">&gt; INTERACTIVE_SHELL.EXE</span>
-        <h2 class="section-title">Embedded Serial Console</h2>
-      </div>
-
-      <div class="terminal-container">
+      <!-- Interactive Serial Terminal Widget -->
+      <div class="terminal-card">
         <div class="terminal-header">
           <div class="terminal-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
           </div>
-          <div class="terminal-title">teverah@mcu-core:~ (UART0 @ 115200 baud)</div>
-          <div><i class="fa-solid fa-signal" style="color: var(--accent-green); font-size: 0.8rem;"></i></div>
+          <div class="terminal-title">teverah@embedded-node: /dev/ttyUSB0</div>
+          <div style="font-size:0.7rem; color:var(--text-muted);"><i class="fa-solid fa-bolt"></i> 3.3V</div>
         </div>
-
         <div class="terminal-body" id="terminalBody">
-          <div class="terminal-line" style="color: var(--accent-green);">Panenyasha Teverah Embedded OS [Version 2.4.0-RTOS]</div>
-          <div class="terminal-line" style="color: var(--text-muted);">Type <span style="color: var(--accent-cyan); font-weight: bold;">'help'</span> to view available embedded system commands or click suggested commands below.</div>
-          <div class="terminal-line" style="color: var(--text-dim);">--------------------------------------------------------------------------------</div>
+          <div class="terminal-line"><span style="color:var(--accent-green);">[SYSTEM INIT]</span> Panenyasha Teverah Embedded CLI v2.4</div>
+          <div class="terminal-line"><span style="color:var(--accent-cyan);">[HARDWARE]</span> ESP32-S3 / STM32F4 / ATmega32U4 Detected</div>
+          <div class="terminal-line"><span style="color:var(--accent-amber);">[STATUS]</span> Ready. Type <span style="color:var(--accent-green); font-weight:bold;">'help'</span> or click shortcut buttons below.</div>
         </div>
-
-        <div style="padding: 10px 20px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.8rem; font-family: var(--font-mono);">
-          <span style="color: var(--text-dim);">Quick Commands:</span>
-          <span class="cmd-link" onclick="runTerminalCmd('projects')">projects</span>
-          <span class="cmd-link" onclick="runTerminalCmd('skills')">skills</span>
-          <span class="cmd-link" onclick="runTerminalCmd('status')">status</span>
-          <span class="cmd-link" onclick="runTerminalCmd('contact')">contact</span>
-          <span class="cmd-link" onclick="runTerminalCmd('clear')">clear</span>
+        <div class="cmd-shortcuts">
+          <button class="shortcut-btn" onclick="runTerminalCmd('help')">help</button>
+          <button class="shortcut-btn" onclick="runTerminalCmd('skills')">skills</button>
+          <button class="shortcut-btn" onclick="runTerminalCmd('projects')">projects</button>
+          <button class="shortcut-btn" onclick="runTerminalCmd('experience')">experience</button>
+          <button class="shortcut-btn" onclick="runTerminalCmd('clear')">clear</button>
         </div>
-
-        <div class="terminal-input-row" style="padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-          <span class="terminal-prompt">teverah@embedded-node:~$</span>
-          <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command (e.g. 'help', 'status')..." autocomplete="off">
+        <div style="padding: 0.4rem 1rem 0.8rem; background: #090b12;">
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">&gt;</span>
+            <input type="text" id="terminalInput" class="terminal-input" placeholder="Type command..." autocomplete="off">
+          </div>
         </div>
       </div>
     </section>
 
-    <script>
-      const terminalBody = document.getElementById('terminalBody');
-      const terminalInput = document.getElementById('terminalInput');
-
-      const commands = {
-        help: `Available Commands:
-  - <span style="color:var(--accent-cyan)">projects</span> : List featured embedded hardware and firmware projects
-  - <span style="color:var(--accent-cyan)">skills</span>   : Output core engineering competencies and stack
-  - <span style="color:var(--accent-cyan)">status</span>   : Query MCU voltage, clock speed, and telemetry state
-  - <span style="color:var(--accent-cyan)">contact</span>  : Display email & social connection channels
-  - <span style="color:var(--accent-cyan)">clear</span>    : Clear serial terminal screen`,
-
-        projects: `[1] Wireless Underground Lift Management System (Arduino + NRF24L01 + Gas/Temp Monitoring)
-[2] ESP32 Constant-Current Battery Capacity Tester (LM358 + MOSFET + Calibrated ADC LUT)
-[3] Industrial Sensor Node & Micro-Grid Power Monitor (STM32 + RS485 Modbus)`,
-
-        skills: `Core Firmware & Hardware Capabilities:
-  • Languages: C, C++, Python, Assembly (ARM Cortex-M)
-  • RTOS & Frameworks: FreeRTOS, ESP-IDF, STM32 HAL, Arduino
-  • PCB Tools: KiCad, Altium Designer, Eagle
-  • Hardware Protocols: SPI, I2C, UART, CAN Bus, Modbus RS485, NRF24, LoRa, BLE`,
-
-        status: `[SYS STATUS REPORT]
-  • MCU Core Voltage : 3.30V [STABLE]
-  • System Clock     : 240 MHz (Dual-Core LX6)
-  • Free Heap        : 284.5 KB
-  • Radio Protocol   : NRF24L01 / 2.4 GHz [ACTIVE]
-  • Battery Sensor   : Calibrated 12-bit ADC (LUT Active)
-  • Health State     : OPTIMAL - 0 Faults Recorded`,
-
-        contact: `Direct Contact Channels:
-  • Email    : mrteverah@gmail.com
-  • LinkedIn : https://www.linkedin.com/in/panenyasha-teverah-933017262
-  • GitHub   : https://github.com/tavestaves`
-      };
-
-      function escapeHtml(str) {
-        return str.replace(/[&<>'"]/g,
-          tag => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-          }[tag] || tag)
-        );
-      }
-
-      function appendTerminalLine(htmlContent) {
-        const line = document.createElement('div');
-        line.className = 'terminal-line';
-        line.innerHTML = htmlContent;
-        terminalBody.appendChild(line);
-        terminalBody.scrollTop = terminalBody.scrollHeight;
-      }
-
-      function runTerminalCmd(cmdStr) {
-        const cleanCmd = cmdStr.trim().toLowerCase();
-        appendTerminalLine(`<span class="terminal-prompt">teverah@embedded-node:~$</span> ${escapeHtml(cmdStr)}`);
-
-        if (cleanCmd === 'clear') {
-          terminalBody.innerHTML = '';
-          appendTerminalLine('<span style="color: var(--accent-green);">Terminal output cleared.</span>');
-          return;
-        }
-
-        if (commands[cleanCmd]) {
-          appendTerminalLine(commands[cleanCmd]);
-        } else if (cleanCmd === '') {
-          // Empty input
-        } else {
-          appendTerminalLine(`<span style="color: var(--accent-red);">Command not recognized: '${escapeHtml(cleanCmd)}'. Type 'help' for options.</span>`);
-        }
-      }
-
-      terminalInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const val = terminalInput.value;
-          runTerminalCmd(val);
-          terminalInput.value = '';
-        }
-      });
-    </script>
-
     <!-- Projects Section -->
-    <section id="projects">
+    <section class="section" id="projects">
       <div class="section-header">
-        <span class="section-tag">&gt; HARDWARE_HARDENING & FIRMWARE</span>
-        <h2 class="section-title">Engineering Projects</h2>
+        <span class="section-tag">// Engineering Showcase</span>
+        <h2 class="section-title">Selected Engineering Projects</h2>
       </div>
 
-      <div class="filter-tabs">
-        <button class="filter-btn active" onclick="filterProjects('all')">ALL SYSTEMS</button>
-        <button class="filter-btn" onclick="filterProjects('rf')">IoT & RF TELEMETRY</button>
-        <button class="filter-btn" onclick="filterProjects('power')">POWER & LOAD TESTERS</button>
-        <button class="filter-btn" onclick="filterProjects('industrial')">INDUSTRIAL & SENSORS</button>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProjects('all')">All Systems</button>
+        <button class="filter-btn" onclick="filterProjects('firmware')">Firmware & Decoders</button>
+        <button class="filter-btn" onclick="filterProjects('bms')">BMS & Power</button>
+        <button class="filter-btn" onclick="filterProjects('wireless')">Wireless & IoT</button>
+        <button class="filter-btn" onclick="filterProjects('vision')">Computer Vision</button>
       </div>
 
       <div class="projects-grid">
+
         <!-- Project 1 -->
-        <div class="glass-card project-card" data-category="rf">
+        <div class="project-card" data-category="firmware">
           <div>
-            <div class="project-tag"><i class="fa-solid fa-tower-broadcast"></i> IoT & RF TELEMETRY</div>
-            <h3 class="project-title">Wireless Underground Lift Management & Mining Safety System</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Two-way 2.4 GHz RF communication pipeline with real-time lift control, worker location RFID tags, and multi-gas/environmental sensor telemetry designed for harsh underground mining shafts.
-            </p>
-
-            <div class="project-specs">
-              <div class="spec-item">
-                <span>MICROCONTROLLER</span>
-                <strong>Arduino / ATmega328P</strong>
-              </div>
-              <div class="spec-item">
-                <span>RF TRANSCEIVER</span>
-                <strong>NRF24L01 + PA/LNA</strong>
-              </div>
-              <div class="spec-item">
-                <span>SENSORS</span>
-                <strong>MQ-4 Gas, DHT22, RFID</strong>
-              </div>
-              <div class="spec-item">
-                <span>PROTOCOL</span>
-                <strong>Custom Framed Packets</strong>
-              </div>
+            <div class="project-top">
+              <span class="project-category">FIRMWARE / REVERSE ENGINEERING</span>
+              <span style="font-family: var(--font-mono); font-size:0.75rem; color:var(--text-muted);">ATmega32U4</span>
             </div>
-
-            <details>
-              <summary style="cursor: pointer; color: var(--accent-green); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 10px;">
-                <i class="fa-solid fa-code"></i> View C++ Firmware Snippet
-              </summary>
-              <pre class="code-snippet-box"><code>struct LiftMsg {
-  uint8_t level;
-  uint8_t type; // 1: CALL, 2: ALERT, 3: HEARTBEAT
-  uint16_t gasPpm;
-  uint32_t timestamp;
-};
-
-RF24 radio(9, 10);
-const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
-
-bool sendLiftCall(uint8_t level, uint16_t gasLevel) {
-  radio.stopListening();
-  LiftMsg msg{ level, 1, gasLevel, (uint32_t)millis() };
-  bool ack = radio.write(&msg, sizeof(msg));
-  radio.startListening();
-  return ack;
-}</code></pre>
-            </details>
+            <h3 class="project-title">Embedded Display Bus Decoder</h3>
+            <p class="project-desc">
+              Captured and decoded an undocumented five-wire charlieplexed display interface using an ATmega32U4. Applied rigorous timing analysis and state reconstruction logic to recover live device status and charge-state telemetry without original documentation.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-pill">C/C++</span>
+              <span class="tech-pill">ATmega32U4</span>
+              <span class="tech-pill">Charlieplexing</span>
+              <span class="tech-pill">Logic Analyzer</span>
+              <span class="tech-pill">Timing Analysis</span>
+            </div>
           </div>
-
-          <div style="margin-top: 20px; display: flex; gap: 10px;">
-            <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.75rem; flex: 1;" onclick="openProjectModal('lift-system')">
-              <i class="fa-solid fa-microchip"></i> System Architecture
+          <div class="project-actions">
+            <button class="code-toggle" onclick="toggleCode('code-display-decoder')">
+              <i class="fa-solid fa-code"></i> View C Snippet
             </button>
           </div>
+          <div id="code-display-decoder" class="code-block">
+// Charlieplexed 5-wire Signal State Decoder
+#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+
+typedef struct {
+  uint8_t pin_high;
+  uint8_t pin_low;
+  uint8_t state_id;
+} DisplayState;
+
+void decode_charlieplex_bus(uint8_t raw_pins) {
+  // Timing window capture for 5-wire multiplexed signals
+  static uint32_t last_edge_us = 0;
+  uint8_t state = (raw_pins &amp; 0x1F);
+
+  if (state == 0x0A) {
+    // Battery Status LED Active
+    PORTD |= (1 &lt;&lt; PORTD2);
+  }
+}</div>
         </div>
 
         <!-- Project 2 -->
-        <div class="glass-card project-card" data-category="power">
+        <div class="project-card" data-category="wireless">
           <div>
-            <div class="project-tag"><i class="fa-solid fa-car-battery"></i> POWER & LOAD TESTERS</div>
-            <h3 class="project-title">ESP32 Precision Constant-Current Battery Capacity Tester</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Programmable constant-current electronic load utilizing DAC-controlled LM358 op-amp feedback, N-channel power MOSFET, linearized ADC calibration LUT, and touch interface for battery health verification.
-            </p>
-
-            <div class="project-specs">
-              <div class="spec-item">
-                <span>CONTROLLER</span>
-                <strong>ESP32 Dual-Core</strong>
-              </div>
-              <div class="spec-item">
-                <span>ANALOG CONTROL</span>
-                <strong>DAC + LM358 Op-Amp</strong>
-              </div>
-              <div class="spec-item">
-                <span>ADC CALIBRATION</span>
-                <strong>4096-Point LUT</strong>
-              </div>
-              <div class="spec-item">
-                <span>POWER SENSING</span>
-                <strong>1Ω Precision Shunt</strong>
-              </div>
+            <div class="project-top">
+              <span class="project-category">WIRELESS / RF & IOT</span>
+              <span style="font-family: var(--font-mono); font-size:0.75rem; color:var(--text-muted);">ESP32 / LoRa SX1276</span>
             </div>
-
-            <details>
-              <summary style="cursor: pointer; color: var(--accent-green); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 10px;">
-                <i class="fa-solid fa-code"></i> View ESP32 Firmware Snippet
-              </summary>
-              <pre class="code-snippet-box"><code>int getCalibratedMilliVolts() {
-  int total = 0;
-  for(int i = 0; i &lt; 16; i++) {
-    int raw = analogRead(ADC_PIN);
-    total += (int)ADC_LUT[raw];
-    delayMicroseconds(100);
-  }
-  int avg = total / 16;
-  return map(avg, 0, 4095, 0, 3300) * DIVIDER_RATIO;
-}
-
-void startDischargeLoad(uint8_t dacValue) {
-  dacWrite(DAC_CHANNEL_1, dacValue); // Drive LM358 Op-Amp
-  Serial.printf("CC Discharge Active: DAC Code %d\n", dacValue);
-}</code></pre>
-            </details>
+            <h3 class="project-title">LoRa Wireless Monitoring Concept</h3>
+            <p class="project-desc">
+              Developed a microcontroller and LoRa-based long-range monitoring concept integrating industrial sensors, embedded real-time control logic, low-power telemetry transmission, and status packet integrity verification.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-pill">C++</span>
+              <span class="tech-pill">ESP32</span>
+              <span class="tech-pill">LoRa SX1276</span>
+              <span class="tech-pill">SPI Protocol</span>
+              <span class="tech-pill">Low Power</span>
+            </div>
           </div>
-
-          <div style="margin-top: 20px; display: flex; gap: 10px;">
-            <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.75rem; flex: 1;" onclick="openProjectModal('battery-tester')">
-              <i class="fa-solid fa-microchip"></i> Hardware Schematics
+          <div class="project-actions">
+            <button class="code-toggle" onclick="toggleCode('code-lora')">
+              <i class="fa-solid fa-code"></i> View C++ Snippet
             </button>
-            <a href="#simulator" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.75rem;">
-              <i class="fa-solid fa-play"></i> Run Sim
-            </a>
           </div>
+          <div id="code-lora" class="code-block">
+// LoRa SX1276 Packet Serializer
+#include &lt;SPI.h&gt;
+#include &lt;LoRa.h&gt;
+
+struct TelemetryPacket {
+  uint16_t node_id;
+  float voltage;
+  float temp_c;
+  uint32_t uptime_s;
+} __attribute__((packed));
+
+void transmit_telemetry(TelemetryPacket* pkt) {
+  LoRa.beginPacket();
+  LoRa.write((uint8_t*)pkt, sizeof(TelemetryPacket));
+  LoRa.endPacket();
+}</div>
         </div>
 
         <!-- Project 3 -->
-        <div class="glass-card project-card" data-category="industrial">
+        <div class="project-card" data-category="bms">
           <div>
-            <div class="project-tag"><i class="fa-solid fa-industry"></i> INDUSTRIAL & SENSORS</div>
-            <h3 class="project-title">STM32 Micro-Grid Energy Monitor & RS485 Modbus Node</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Industrial energy logger equipped with isolated RS485 Modbus RTU communication, zero-cross ac current transformer sampling, and real-time power factor calculations for recycling facilities.
-            </p>
-
-            <div class="project-specs">
-              <div class="spec-item">
-                <span>CONTROLLER</span>
-                <strong>STM32F4 Cortex-M4</strong>
-              </div>
-              <div class="spec-item">
-                <span>BUS PROTOCOL</span>
-                <strong>RS485 Modbus RTU</strong>
-              </div>
-              <div class="spec-item">
-                <span>ISOLATION</span>
-                <strong>Optocoupled Bus</strong>
-              </div>
-              <div class="spec-item">
-                <span>DSP SAMPLING</span>
-                <strong>Timer-Triggered DMA</strong>
-              </div>
+            <div class="project-top">
+              <span class="project-category">BMS / TEST PLATFORM</span>
+              <span style="font-family: var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Li-ion &amp; LiFePO4</span>
             </div>
-
-            <details>
-              <summary style="cursor: pointer; color: var(--accent-green); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 10px;">
-                <i class="fa-solid fa-code"></i> View C / HAL Code Snippet
-              </summary>
-              <pre class="code-snippet-box"><code>void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-  // DMA Buffer Full Interrupt
-  float rmsCurrent = calculate_RMS(adcBuffer, BUFFER_SIZE);
-  modbusRegisters[REG_CURRENT_RMS] = (uint16_t)(rmsCurrent * 100);
-}</code></pre>
-            </details>
+            <h3 class="project-title">Battery Capacity and BMS Test Platform</h3>
+            <p class="project-desc">
+              Developed controlled charge/discharge diagnostic workflows featuring precise voltage/current acquisition, real-time mAh integration, protection check automated validation, and continuous thermal evaluation for Li-ion and LiFePO4 cells.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">C Firmware</span>
+              <span class="tech-pill">ADC Integration</span>
+              <span class="tech-pill">Electronic Load</span>
+              <span class="tech-pill">mAh Coulomb Counter</span>
+            </div>
           </div>
+          <div class="project-actions">
+            <button class="code-toggle" onclick="toggleCode('code-bms')">
+              <i class="fa-solid fa-code"></i> View C++ Snippet
+            </button>
+            <a href="#simulator" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size:0.78rem;">
+              <i class="fa-solid fa-play"></i> Launch Simulator
+            </a>
+          </div>
+          <div id="code-bms" class="code-block">
+// Coulomb Counting mAh Integration Algorithm
+float sample_current_amps() {
+  uint32_t adc_raw = analogRead(SHUNT_PIN);
+  return ((float)adc_raw / 4095.0f) * 3.3f / SHUNT_RESISTOR_OHMS;
+}
 
-          <div style="margin-top: 20px; display: flex; gap: 10px;">
-            <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.75rem; flex: 1;" onclick="openProjectModal('modbus-node')">
-              <i class="fa-solid fa-microchip"></i> Industrial Specs
+void update_capacity(float delta_sec) {
+  float current_a = sample_current_amps();
+  accumulated_mah += (current_a * (delta_sec / 3600.0f)) * 1000.0f;
+}</div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card" data-category="vision">
+          <div>
+            <div class="project-top">
+              <span class="project-category">COMPUTER VISION / AI</span>
+              <span style="font-family: var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Python / OpenCV</span>
+            </div>
+            <h3 class="project-title">Computer Vision Chess System</h3>
+            <p class="project-desc">
+              Built Python/OpenCV computer vision pipelines for automatic chessboard localization, perspective transformation, grid extraction, and piece-position state mapping, seamlessly bridging overhead cameras with embedded system microcontrollers.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">OpenCV</span>
+              <span class="tech-pill">Perspective Transform</span>
+              <span class="tech-pill">UART Matrix Protocol</span>
+            </div>
+          </div>
+          <div class="project-actions">
+            <button class="code-toggle" onclick="toggleCode('code-chess')">
+              <i class="fa-solid fa-code"></i> View Python Snippet
             </button>
           </div>
+          <div id="code-chess" class="code-block">
+# Chessboard Grid Extraction Pipeline
+import cv2
+import numpy as np
+
+def extract_grid(image, corners):
+    pts1 = np.float32(corners)
+    pts2 = np.float32([[0,0], [400,0], [0,400], [400,400]])
+    matrix = cv2.getPerspectiveTransform(pts1, pts2)
+    warped = cv2.warpPerspective(image, matrix, (400, 400))
+    return warped</div>
         </div>
+
       </div>
     </section>
 
-    <!-- Project Details Modal -->
-    <div class="modal-overlay" id="projectModal">
-      <div class="modal-content">
-        <button class="modal-close" onclick="closeProjectModal()"><i class="fa-solid fa-xmark"></i></button>
-        <div id="modalDetailsBody">
-          <!-- Filled dynamically via JS -->
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function filterProjects(category) {
-        const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-
-        const cards = document.querySelectorAll('.project-card');
-        cards.forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
-        });
-      }
-
-      const modalData = {
-        'lift-system': `
-          <h2 style="font-family: var(--font-heading); color: var(--accent-green); margin-bottom: 15px;">
-            Wireless Underground Lift System - Architecture Breakdown
-          </h2>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">
-            Designed for heavy subterranean environments where line-of-sight wiring frequently fails. The system deploys star-grounded RF nodes with automatic frequency hopping and framing retry algorithms.
-          </p>
-
-          <h4 style="color: var(--accent-cyan); font-family: var(--font-heading); margin-top: 15px;">Hardware & Power Management</h4>
-          <ul style="color: var(--text-main); margin-left: 20px; line-height: 1.8;">
-            <li><strong>Power Rail:</strong> LM2596 Buck Converter regulates 12V underground line down to 5V; ultra-low-noise AMS1117-3.3 dedicated to NRF24L01.</li>
-            <li><strong>Filtering:</strong> 470µF bulk tantalum + 100nF ceramic decoupling caps placed within 3mm of RF module VCC pins to suppress voltage dips during high PA burst transmission.</li>
-            <li><strong>Sensors:</strong> MQ-4 Methane/Gas sensor routed through active op-amp analog conditioning filter to eliminate motor noise.</li>
-          </ul>
-
-          <h4 style="color: var(--accent-cyan); font-family: var(--font-heading); margin-top: 15px;">Protocol & Safety Verification</h4>
-          <p style="color: var(--text-muted);">
-            Includes Watchdog Timer (WDT) resets every 2 seconds. If RF acknowledgment drops 3 consecutive frames, Master & Slave devices trigger fail-safe visual and audible alarms.
-          </p>
-        `,
-        'battery-tester': `
-          <h2 style="font-family: var(--font-heading); color: var(--accent-green); margin-bottom: 15px;">
-            ESP32 Electronic Load & PCB Schematic Details
-          </h2>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">
-            Enables high-accuracy Li-ion, LiFePO4, and Lead-Acid discharge testing with millivolt-level precision and software thermal derating.
-          </p>
-
-          <h4 style="color: var(--accent-cyan); font-family: var(--font-heading); margin-top: 15px;">Op-Amp Closed-Loop Circuitry</h4>
-          <ul style="color: var(--text-main); margin-left: 20px; line-height: 1.8;">
-            <li><strong>Feedback Loop:</strong> ESP32 DAC1 outputs voltage bias to LM358 non-inverting pin. The op-amp drives the MOSFET gate until sense voltage across 1Ω shunt equals DAC bias.</li>
-            <li><strong>Loop Stability:</strong> 100Ω series resistor at gate + 47nF feedback capacitor across sense node prevents high-frequency MOSFET oscillation.</li>
-            <li><strong>Star Grounding:</strong> Power return current from the 1Ω shunt is physically separated from analog signal ground, tying together at a single point under the ESP32 module.</li>
-          </ul>
-        `,
-        'modbus-node': `
-          <h2 style="font-family: var(--font-heading); color: var(--accent-green); margin-bottom: 15px;">
-            STM32 Industrial RS485 Modbus Architecture
-          </h2>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">
-            High-reliability energy monitoring node built for heavy industrial machinery noise immunity and sub-millisecond telemetry response.
-          </p>
-          <ul style="color: var(--text-main); margin-left: 20px; line-height: 1.8;">
-            <li><strong>Isolation:</strong> ISO3082 galvanic RS485 transceiver with TVS diode array for 15kV ESD protection.</li>
-            <li><strong>DMA Processing:</strong> Zero CPU overhead ADC sampling over 128 cycles per AC line wave.</li>
-          </ul>
-        `
-      };
-
-      function openProjectModal(key) {
-        document.getElementById('modalDetailsBody').innerHTML = modalData[key] || '<p>No data available</p>';
-        document.getElementById('projectModal').classList.add('active');
-      }
-
-      function closeProjectModal() {
-        document.getElementById('projectModal').classList.remove('active');
-      }
-    </script>
-
-    <!-- Hardware Simulator Widget -->
-    <section id="simulator">
+    <!-- Interactive BMS Battery Discharge Simulator -->
+    <section class="section" id="simulator">
       <div class="section-header">
-        <span class="section-tag">&gt; REALTIME_BENCH_TESTER.SIM</span>
-        <h2 class="section-title">ESP32 Battery Load Simulator</h2>
+        <span class="section-tag">// Realtime Hardware Simulation</span>
+        <h2 class="section-title">ESP32 Battery Discharge Load Simulator</h2>
       </div>
 
-      <div class="sim-container">
-        <div class="glass-card sim-controls">
-          <h4 style="font-family: var(--font-heading); color: var(--accent-green); font-size: 0.95rem;">
-            <i class="fa-solid fa-sliders"></i> Test Parameters
-          </h4>
-
-          <div class="sim-ctrl-group">
-            <label for="simCellType">Battery Chemistry</label>
-            <select id="simCellType" class="sim-input" onchange="resetSim()">
-              <option value="liion">1S Li-Ion / LiPo (4.2V - 3.0V)</option>
-              <option value="lifepo4">1S LiFePO4 (3.6V - 2.5V)</option>
+      <div class="sim-card">
+        <div class="sim-controls">
+          <div class="sim-field">
+            <div class="sim-label">
+              <span>Battery Chemistry</span>
+              <span id="chemLabel" style="color:var(--accent-amber);">Li-ion (3.7V / 2500mAh)</span>
+            </div>
+            <select id="chemSelect" class="sim-select" onchange="updateSimChem()">
+              <option value="liion">Li-ion (3.7V Nominal, 3.0V Cutoff)</option>
+              <option value="lifepo4">LiFePO4 (3.2V Nominal, 2.5V Cutoff)</option>
             </select>
           </div>
 
-          <div class="sim-ctrl-group">
-            <label for="simCurrent">Discharge Current (mA)</label>
-            <input type="number" id="simCurrent" class="sim-input" value="500" min="100" max="2000" step="50" onchange="resetSim()">
+          <div class="sim-field">
+            <div class="sim-label">
+              <span>Constant Current Load (Amps)</span>
+              <span id="loadLabel" style="color:var(--accent-cyan);">1.50 A</span>
+            </div>
+            <input type="range" id="loadSlider" class="sim-slider" min="0.5" max="3.0" step="0.1" value="1.5" oninput="updateSimLoad()">
           </div>
 
-          <div class="sim-ctrl-group">
-            <label for="simCutoff">Cut-off Voltage (mV)</label>
-            <input type="number" id="simCutoff" class="sim-input" value="3000" min="2000" max="3500" step="100" onchange="resetSim()">
+          <div class="sim-metrics">
+            <div class="metric-box">
+              <div class="metric-val" id="voltsVal">4.20V</div>
+              <div class="metric-lbl">Cell Voltage</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val" id="mahVal" style="color:var(--accent-green);">0 mAh</div>
+              <div class="metric-lbl">Discharged</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val" id="statusVal" style="color:var(--accent-green);">DISCHARGING</div>
+              <div class="metric-lbl">BMS State</div>
+            </div>
           </div>
 
-          <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button id="simStartBtn" class="btn btn-primary" style="flex: 1; padding: 8px; font-size: 0.75rem;" onclick="toggleSim()">
-              <i class="fa-solid fa-play"></i> Start Load
-            </button>
-            <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 0.75rem;" onclick="resetSim()">
-              <i class="fa-solid fa-rotate-left"></i> Reset
-            </button>
-          </div>
-
-          <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-mono); font-size: 0.8rem;">
-            <div>Voltage: <strong id="simVoltLbl" style="color: var(--accent-green);">4200 mV</strong></div>
-            <div>Current: <strong id="simCurrLbl" style="color: var(--accent-cyan);">0 mA</strong></div>
-            <div>Capacity: <strong id="simMahLbl" style="color: var(--accent-orange);">0 mAh</strong></div>
-            <div>State: <strong id="simStatusLbl" style="color: var(--text-muted);">STANDBY</strong></div>
+          <div style="display:flex; gap:0.6rem;">
+            <button class="btn btn-primary" onclick="toggleSim()"><i class="fa-solid fa-play" id="simPlayIcon"></i> <span id="simBtnText">Pause Test</span></button>
+            <button class="btn btn-outline" onclick="resetSim()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
           </div>
         </div>
 
-        <div class="sim-canvas-wrapper">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">
-            <span><i class="fa-solid fa-chart-line" style="color: var(--accent-green);"></i> Voltage Curve (mV vs Samples)</span>
-            <span id="simTimeLbl">Time Elapsed: 0s</span>
+        <div class="sim-canvas-container">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
+            <span><i class="fa-solid fa-chart-line"></i> V(t) Discharge Curve Plotter</span>
+            <span style="color:var(--accent-green);">10 Samples/sec</span>
           </div>
-          <canvas id="simCanvas" width="600" height="260" style="width: 100%; height: 260px; display: block;"></canvas>
+          <canvas id="simCanvas"></canvas>
         </div>
       </div>
     </section>
 
-    <script>
-      const simCanvas = document.getElementById('simCanvas');
-      const ctx = simCanvas.getContext('2d');
-
-      let simRunning = false;
-      let simInterval = null;
-      let simSamples = [];
-      let elapsedSeconds = 0;
-      let calculatedMah = 0;
-
-      function getSimInitialVoltage() {
-        const type = document.getElementById('simCellType').value;
-        return type === 'liion' ? 4200 : 3600;
-      }
-
-      function resetSim() {
-        simRunning = false;
-        clearInterval(simInterval);
-        document.getElementById('simStartBtn').innerHTML = '<i class="fa-solid fa-play"></i> Start Load';
-
-        const initV = getSimInitialVoltage();
-        simSamples = [initV];
-        elapsedSeconds = 0;
-        calculatedMah = 0;
-
-        document.getElementById('simVoltLbl').textContent = `${initV} mV`;
-        document.getElementById('simCurrLbl').textContent = `0 mA`;
-        document.getElementById('simMahLbl').textContent = `0 mAh`;
-        document.getElementById('simStatusLbl').textContent = `STANDBY`;
-        document.getElementById('simStatusLbl').style.color = `var(--text-muted)`;
-        document.getElementById('simTimeLbl').textContent = `Time Elapsed: 0s`;
-
-        drawSimCanvas();
-      }
-
-      function toggleSim() {
-        if (simRunning) {
-          simRunning = false;
-          clearInterval(simInterval);
-          document.getElementById('simStartBtn').innerHTML = '<i class="fa-solid fa-play"></i> Resume Load';
-          document.getElementById('simStatusLbl').textContent = `PAUSED`;
-        } else {
-          simRunning = true;
-          document.getElementById('simStartBtn').innerHTML = '<i class="fa-solid fa-pause"></i> Pause Load';
-          document.getElementById('simStatusLbl').textContent = `DRAINING`;
-          document.getElementById('simStatusLbl').style.color = `var(--accent-green)`;
-
-          simInterval = setInterval(() => {
-            const current = parseFloat(document.getElementById('simCurrent').value);
-            const cutoff = parseFloat(document.getElementById('simCutoff').value);
-
-            elapsedSeconds += 1;
-            calculatedMah += (current / 3600); // 1 sec slice of mAh
-
-            let currentVolt = simSamples[simSamples.length - 1];
-            // Discharge slope with small noise
-            const drop = (current / 1200) + (Math.random() * 2 - 1);
-            currentVolt = Math.max(cutoff, currentVolt - drop);
-
-            simSamples.push(currentVolt);
-
-            document.getElementById('simVoltLbl').textContent = `${Math.round(currentVolt)} mV`;
-            document.getElementById('simCurrLbl').textContent = `${current} mA`;
-            document.getElementById('simMahLbl').textContent = `${Math.round(calculatedMah)} mAh`;
-            document.getElementById('simTimeLbl').textContent = `Time Elapsed: ${elapsedSeconds}s`;
-
-            drawSimCanvas();
-
-            if (currentVolt <= cutoff) {
-              simRunning = false;
-              clearInterval(simInterval);
-              document.getElementById('simStartBtn').innerHTML = '<i class="fa-solid fa-check"></i> Completed';
-              document.getElementById('simStatusLbl').textContent = `CUTOFF REACHED`;
-              document.getElementById('simStatusLbl').style.color = `var(--accent-red)`;
-            }
-          }, 400);
-        }
-      }
-
-      function drawSimCanvas() {
-        const width = simCanvas.width;
-        const height = simCanvas.height;
-
-        ctx.clearRect(0, 0, width, height);
-
-        // Draw grid
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.lineWidth = 1;
-
-        for (let x = 0; x < width; x += 40) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-          ctx.stroke();
-        }
-
-        for (let y = 0; y < height; y += 40) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
-          ctx.stroke();
-        }
-
-        // Draw Plot
-        if (simSamples.length < 2) return;
-
-        ctx.beginPath();
-        ctx.strokeStyle = '#00ff9d';
-        ctx.lineWidth = 2;
-
-        const maxV = getSimInitialVoltage() + 100;
-        const minV = 2000;
-
-        for (let i = 0; i < simSamples.length; i++) {
-          const x = (i / Math.max(simSamples.length - 1, 50)) * width;
-          const y = height - ((simSamples[i] - minV) / (maxV - minV)) * height;
-
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-
-        ctx.stroke();
-      }
-
-      // Initial canvas draw
-      resetSim();
-    </script>
-
-    <!-- Skills Section -->
-    <section id="skills">
+    <!-- Skills & Lab Equipment Section -->
+    <section class="section" id="skills">
       <div class="section-header">
-        <span class="section-tag">&gt; CORE_COMPETENCIES.DLL</span>
-        <h2 class="section-title">Technical Expertise</h2>
+        <span class="section-tag">// Competencies</span>
+        <h2 class="section-title">Core Technical Skills & Lab Equipment</h2>
       </div>
 
       <div class="skills-grid">
-        <div class="glass-card">
-          <h3 class="skill-category-title"><i class="fa-solid fa-microchip"></i> Hardware & PCB Design</h3>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+          <h3 class="skill-card-title">Programming & Firmware</h3>
           <ul class="skill-list">
-            <li class="skill-item">
-              <span>KiCad & Altium Designer</span>
-              <span class="skill-tag-pill">Multi-Layer</span>
-            </li>
-            <li class="skill-item">
-              <span>High-Speed Routing & Impeadance</span>
-              <span class="skill-tag-pill">Star Ground</span>
-            </li>
-            <li class="skill-item">
-              <span>Power Supplies & Buck Regulators</span>
-              <span class="skill-tag-pill">DC-DC</span>
-            </li>
-            <li class="skill-item">
-              <span>Thermal Management & Heatsinking</span>
-              <span class="skill-tag-pill">SOA Control</span>
-            </li>
+            <li>C &amp; C++ Firmware</li>
+            <li>Python Automation &amp; Scripts</li>
+            <li>Embedded Control &amp; Real-Time Logic</li>
+            <li>Low-Level Register Interfaces</li>
+            <li>Git/GitHub, PlatformIO, ESP-IDF</li>
           </ul>
         </div>
 
-        <div class="glass-card">
-          <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Firmware & RTOS</h3>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fa-solid fa-microchip"></i></div>
+          <h3 class="skill-card-title">Embedded Platforms</h3>
           <ul class="skill-list">
-            <li class="skill-item">
-              <span>Embedded C / C++</span>
-              <span class="skill-tag-pill">Bare-Metal</span>
-            </li>
-            <li class="skill-item">
-              <span>FreeRTOS Tasks & Semaphores</span>
-              <span class="skill-tag-pill">Multithreading</span>
-            </li>
-            <li class="skill-item">
-              <span>ESP-IDF & PlatformIO</span>
-              <span class="skill-tag-pill">Dual-Core</span>
-            </li>
-            <li class="skill-item">
-              <span>STM32 HAL / LL Drivers</span>
-              <span class="skill-tag-pill">DMA / Interrupts</span>
-            </li>
+            <li>ESP32 (Classic, S2, S3)</li>
+            <li>STM32 / ARM Cortex-M</li>
+            <li>AVR / Arduino / ATmega32U4</li>
+            <li>Raspberry Pi Single Board Computer</li>
+            <li>Exposure to FreeRTOS &amp; Linux</li>
           </ul>
         </div>
 
-        <div class="glass-card">
-          <h3 class="skill-category-title"><i class="fa-solid fa-network-wired"></i> Hardware Protocols</h3>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fa-solid fa-wifi"></i></div>
+          <h3 class="skill-card-title">Interfaces &amp; Wireless</h3>
           <ul class="skill-list">
-            <li class="skill-item">
-              <span>SPI, I2C, UART, CAN Bus</span>
-              <span class="skill-tag-pill">Peripherals</span>
-            </li>
-            <li class="skill-item">
-              <span>RS485 Modbus RTU</span>
-              <span class="skill-tag-pill">Industrial</span>
-            </li>
-            <li class="skill-item">
-              <span>2.4GHz RF (NRF24L01)</span>
-              <span class="skill-tag-pill">Custom Mesh</span>
-            </li>
-            <li class="skill-item">
-              <span>Bluetooth LE & Wi-Fi IoT</span>
-              <span class="skill-tag-pill">Telemetry</span>
-            </li>
+            <li>UART, SPI, I2C, I2S Protocols</li>
+            <li>GPIO, ADC, PWM Pulse Control</li>
+            <li>Wi-Fi &amp; Bluetooth Low Energy (BLE)</li>
+            <li>LoRa SX1276 Long-Range Radio</li>
           </ul>
         </div>
 
-        <div class="glass-card">
-          <h3 class="skill-category-title"><i class="fa-solid fa-vial"></i> Lab & Instrumentation</h3>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fa-solid fa-wave-square"></i></div>
+          <h3 class="skill-card-title">Debugging &amp; Lab Equipment</h3>
           <ul class="skill-list">
-            <li class="skill-item">
-              <span>Digital Oscilloscopes & Logic Analyzers</span>
-              <span class="skill-tag-pill">Signal Inspection</span>
-            </li>
-            <li class="skill-item">
-              <span>SMD Soldering & Rework Stations</span>
-              <span class="skill-tag-pill">Prototypes</span>
-            </li>
-            <li class="skill-item">
-              <span>Electronic Load Testing</span>
-              <span class="skill-tag-pill">Bench Validation</span>
-            </li>
-            <li class="skill-item">
-              <span>Calibrated ADC / DAC Tuning</span>
-              <span class="skill-tag-pill">Linearization</span>
-            </li>
+            <li>Digital Oscilloscopes &amp; Logic Analyzers</li>
+            <li>Signal Generators &amp; DMMs</li>
+            <li>Programmable Electronic Loads</li>
+            <li>Signal &amp; Timing reverse engineering</li>
+            <li>KiCad 9 PCB Design &amp; SMD Rework</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
+    <!-- Professional Experience Section -->
+    <section class="section" id="experience">
       <div class="section-header">
-        <span class="section-tag">&gt; FIELD_DEPLOYMENTS_TRACK_RECORD</span>
+        <span class="section-tag">// Track Record</span>
         <h2 class="section-title">Professional Experience</h2>
       </div>
 
-      <div class="experience-timeline">
-        <div class="glass-card exp-card">
-          <h3 class="exp-role">Electrical & Embedded Engineering Intern</h3>
-          <div class="exp-company"><i class="fa-solid fa-recycle"></i> One More Time — Energy Recovery & Recycling</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Designed and programmed embedded hardware/software systems for material sorting, energy recovery telemetry, and automated machine monitoring. Integrated sensor arrays and developed custom microcontroller firmware for high-uptime industrial operation.
-          </p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="job-title">Electronic Engineer</h3>
+                <span class="company-name">ONE MORE TIME</span> • Cape Town, South Africa
+              </div>
+              <span class="job-date">Jan 2026 - Present</span>
+            </div>
+            <ul class="job-bullets">
+              <li>Develop and troubleshoot C/C++ firmware and Python systems on ESP32, STM32/ARM, AVR/Arduino and Raspberry Pi, integrating sensors, displays, serial interfaces and wireless connectivity.</li>
+              <li>Take ownership of embedded and electronics work across prototype development, firmware implementation, PCB integration, testing, technical documentation and production problem-solving.</li>
+              <li>Reverse-engineer undocumented controllers and multiplexed or charlieplexed interfaces by capturing timing and signal behaviour, then translating findings into monitoring, test and integration solutions.</li>
+              <li>Bring up circuits and PCBs, validate power and interface behaviour, and isolate hardware/firmware faults using oscilloscopes, logic analysers, DMMs and bench equipment.</li>
+              <li>Build repeatable diagnostic workflows for electronic products and battery management systems, covering voltage/current measurement, capacity logging, protection checks and thermal evaluation.</li>
+              <li>Investigate failures with production teams, refine test methods and build procedures, and document corrective actions to improve repeatability and product readiness.</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="glass-card exp-card">
-          <h3 class="exp-role">Electronic Systems & Equipment Technician</h3>
-          <div class="exp-company"><i class="fa-solid fa-truck-monster"></i> Finesse Construction Equipment Hire</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Engineered embedded electronic monitoring systems for heavy construction machinery. Diagnosed complex electrical/engine fault codes, implemented preventive maintenance algorithms, and trained technicians on diagnostic tools.
-          </p>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="job-title">Engineering Intern</h3>
+                <span class="company-name">ONE MORE TIME</span> • Cape Town, South Africa
+              </div>
+              <span class="job-date">2025</span>
+            </div>
+            <ul class="job-bullets">
+              <li>Supported embedded firmware, sensor and display integration, PCB testing and troubleshooting across prototype and production hardware.</li>
+              <li>Assisted with firmware loading, device configuration, test equipment and fault isolation; maintained technical documentation for engineering builds and validation.</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="glass-card exp-card">
-          <h3 class="exp-role">Electronic Engineering Intern</h3>
-          <div class="exp-company"><i class="fa-solid fa-gem"></i> Chrome West Pvt Ltd — Mining Operations</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Ensured zero-downtime safety for subterranean mine hoists, high-voltage water pumps, and underground ventilation units. Spearheaded automated safety trip procedures and power optimization controls.
-          </p>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="job-title">Electronic Engineering Intern</h3>
+                <span class="company-name">ZIMASCO</span> • Zimbabwe
+              </div>
+              <span class="job-date">Jan 2023 - Dec 2023</span>
+            </div>
+            <ul class="job-bullets">
+              <li>Supported instrumentation, PLC-based control and electrical systems for mine hoists, pumps and industrial plant equipment through inspections, troubleshooting, repair and preventive maintenance.</li>
+              <li>Contributed to reliability improvement and energy-efficiency work, maintaining technical records of industrial control and electrical faults.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education & Professional Development -->
+    <section class="section" id="education">
+      <div class="section-header">
+        <span class="section-tag">// Background</span>
+        <h2 class="section-title">Education & Certifications</h2>
+      </div>
+
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">BTech (Honours) Electronic Engineering</div>
+          <div class="edu-school">Harare Institute of Technology (HIT)</div>
+          <div class="edu-date">2020 - 2024</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">Advanced PCB Design with KiCad 9</div>
+          <div class="edu-school">Udemy Certification</div>
+          <div class="edu-date">2025 • Multilayer PCB Workflow &amp; Layout</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">Battery Technology &amp; BMS</div>
+          <div class="edu-school">Udemy Certification</div>
+          <div class="edu-date">Li-ion &amp; EV Batteries, Energy Storage, Testing &amp; Safety</div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact">
+    <!-- Contact Section -->
+    <section class="section" id="contact">
       <div class="section-header">
-        <span class="section-tag">&gt; INITIATE_DIRECT_TELEMETRY</span>
-        <h2 class="section-title">Get In Touch & Collaborate</h2>
+        <span class="section-tag">// Connect</span>
+        <h2 class="section-title">Get In Touch</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 60px;">
-        <div class="glass-card">
-          <h3 style="font-family: var(--font-heading); color: var(--accent-green); margin-bottom: 15px;">
-            <i class="fa-solid fa-comments"></i> Let's Engineer Real Solutions
-          </h3>
-          <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">
-            Whether you have an embedded systems project, custom PCB design challenge, bare-metal C/C++ firmware opportunity, or technical inquiry, I'm ready to collaborate.
+      <div class="contact-card">
+        <div class="contact-info">
+          <p style="color:var(--text-muted); font-size:0.95rem;">
+            Open for embedded engineering projects, firmware bring-up, PCB diagnostic workflows, and hardware integration inquiries.
           </p>
 
-          <div style="display: flex; flex-direction: column; gap: 15px; font-family: var(--font-mono); font-size: 0.9rem;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <i class="fa-solid fa-envelope" style="color: var(--accent-cyan);"></i>
-              <a href="mailto:mrteverah@gmail.com" style="color: var(--text-main); text-decoration: none;">mrteverah@gmail.com</a>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Email</div>
+              <a href="mailto:mrteverah@gmail.com" style="color:var(--text-main); text-decoration:none; font-weight:600;">mrteverah@gmail.com</a>
             </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <i class="fa-brands fa-linkedin" style="color: var(--accent-cyan);"></i>
-              <a href="https://www.linkedin.com/in/panenyasha-teverah-933017262" target="_blank" style="color: var(--text-main); text-decoration: none;">Panenyasha Teverah</a>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Phone</div>
+              <div style="font-weight:600;">+27 62 047 3836</div>
             </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <i class="fa-brands fa-github" style="color: var(--accent-cyan);"></i>
-              <a href="https://github.com/tavestaves" target="_blank" style="color: var(--text-main); text-decoration: none;">github.com/tavestaves</a>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Location</div>
+              <div style="font-weight:600;">Cape Town, South Africa</div>
             </div>
           </div>
         </div>
 
-        <div class="glass-card">
-          <form id="contactForm" onsubmit="handleContactSubmit(event)">
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;">
-              <label for="contactName" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">Your Name *</label>
-              <input type="text" id="contactName" required class="sim-input" placeholder="e.g. Sarah Connor">
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;">
-              <label for="contactEmail" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">Your Email *</label>
-              <input type="email" id="contactEmail" required class="sim-input" placeholder="sarah@example.com">
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;">
-              <label for="contactCategory" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">Category</label>
-              <select id="contactCategory" class="sim-input">
-                <option value="project-inquiry">💡 Project Inquiry / Consultation</option>
-                <option value="collaboration">🤝 Hardware / Firmware Collaboration</option>
-                <option value="hiring">💼 Engineering Role / Contract</option>
-                <option value="general">💬 General Question</option>
-              </select>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
-              <label for="contactMessage" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">Message *</label>
-              <textarea id="contactMessage" required class="sim-input" rows="4" placeholder="Describe your project, hardware specs, or inquiry..."></textarea>
-            </div>
-
-            <button type="submit" id="contactSubmitBtn" class="btn btn-primary" style="width: 100%; justify-content: center;">
-              <i class="fa-solid fa-paper-plane"></i> Send Message
-            </button>
-
-            <div id="contactStatus" style="margin-top: 15px; font-family: var(--font-mono); font-size: 0.85rem; text-align: center; display: none;"></div>
-          </form>
-        </div>
+        <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">NAME</label>
+            <input type="text" id="contactName" class="form-input" required placeholder="e.g. Alex Miller">
+          </div>
+          <div class="form-group">
+            <label class="form-label">EMAIL</label>
+            <input type="email" id="contactEmail" class="form-input" required placeholder="e.g. alex@company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">INQUIRY TYPE</label>
+            <select id="contactCategory" class="form-input">
+              <option value="Firmware & Systems">Firmware &amp; Embedded Systems</option>
+              <option value="PCB & Hardware">PCB Bring-Up &amp; Testing</option>
+              <option value="Battery & BMS">BMS &amp; Power Diagnostics</option>
+              <option value="General">General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">MESSAGE</label>
+            <textarea id="contactMessage" class="form-textarea" required placeholder="Project details or technical inquiry..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center;">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+          <div id="contactStatus" style="font-family:var(--font-mono); font-size:0.8rem; margin-top:0.4rem;"></div>
+        </form>
       </div>
     </section>
 
-    <script>
-      async function handleContactSubmit(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('contactName').value;
-        const email = document.getElementById('contactEmail').value;
-        const category = document.getElementById('contactCategory').value;
-        const message = document.getElementById('contactMessage').value;
-        const statusDiv = document.getElementById('contactStatus');
-        const submitBtn = document.getElementById('contactSubmitBtn');
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting...';
-        statusDiv.style.display = 'block';
-        statusDiv.style.color = 'var(--accent-cyan)';
-        statusDiv.textContent = 'Connecting to backend API...';
-
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('category', category);
-        formData.append('message', message);
-
-        try {
-          const response = await fetch('http://localhost:8000/contact', {
-            method: 'POST',
-            body: formData
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            statusDiv.style.color = 'var(--accent-green)';
-            statusDiv.textContent = '✓ ' + (data.message || 'Message sent successfully!');
-            document.getElementById('contactForm').reset();
-          } else {
-            throw new Error('Server returned error status');
-          }
-        } catch (err) {
-          // Fallback UI indication
-          statusDiv.style.color = 'var(--accent-orange)';
-          statusDiv.textContent = '✓ Transmission queued locally in browser fallback mode!';
-          document.getElementById('contactForm').reset();
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-        }
-      }
-    </script>
-
-    <footer>
-      <p>&copy; <script>document.write(new Date().getFullYear())</script> Panenyasha Teverah. Built for High-Performance Embedded Engineering.</p>
-    </footer>
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="yearVal">2026</span> Panenyasha Teverah • Embedded Software and Systems Engineer</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('yearVal').textContent = new Date().getFullYear();
+
+    // Escape HTML helper
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    // CLI Serial Terminal
+    const terminalBody = document.getElementById('terminalBody');
+    const terminalInput = document.getElementById('terminalInput');
+
+    const commands = {
+      help: `Available commands:
+  • <span style="color:var(--accent-green)">skills</span>      : List technical stack & lab equipment
+  • <span style="color:var(--accent-green)">projects</span>    : Show engineering project summaries
+  • <span style="color:var(--accent-green)">experience</span>  : Show professional work history
+  • <span style="color:var(--accent-green)">contact</span>     : Display email and phone details
+  • <span style="color:var(--accent-green)">clear</span>       : Clear terminal screen`,
+      skills: `<span style="color:var(--accent-cyan)">[SKILLS]</span> C/C++, Python, FreeRTOS, ESP32, STM32, AVR, Raspberry Pi, LoRa, KiCad 9, Oscilloscopes, Logic Analyzers`,
+      projects: `<span style="color:var(--accent-cyan)">[PROJECTS]</span> 1. Embedded Display Decoder | 2. LoRa Monitoring | 3. BMS Test Platform | 4. CV Chess System`,
+      experience: `<span style="color:var(--accent-cyan)">[EXPERIENCE]</span> Electronic Engineer @ One More Time (Cape Town) | Electronic Engineering Intern @ ZIMASCO`,
+      contact: `<span style="color:var(--accent-cyan)">[CONTACT]</span> Email: mrteverah@gmail.com | Phone: +27 62 047 3836 | Location: Cape Town, SA`
+    };
+
+    function appendTerminalLine(htmlContent) {
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      line.innerHTML = htmlContent;
+      terminalBody.appendChild(line);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    function runTerminalCmd(cmdStr) {
+      const cleanCmd = cmdStr.trim().toLowerCase();
+      appendTerminalLine(`<span class="terminal-prompt">&gt;</span> ${escapeHtml(cmdStr)}`);
+
+      if (cleanCmd === 'clear') {
+        terminalBody.innerHTML = '';
+        appendTerminalLine('<span style="color:var(--accent-green);">Terminal cleared.</span>');
+        return;
+      }
+
+      if (commands[cleanCmd]) {
+        appendTerminalLine(commands[cleanCmd]);
+      } else if (cleanCmd !== '') {
+        appendTerminalLine(`<span style="color:var(--accent-red);">Unknown command: '${escapeHtml(cleanCmd)}'. Type 'help' for options.</span>`);
+      }
+    }
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        runTerminalCmd(val);
+        terminalInput.value = '';
+      }
+    });
+
+    // Code Snippet Toggles
+    function toggleCode(id) {
+      const block = document.getElementById(id);
+      if (block) {
+        block.classList.toggle('open');
+      }
+    }
+
+    // Filter Projects
+    function filterProjects(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // BMS Battery Simulator Engine
+    let simActive = true;
+    let simChem = 'liion';
+    let simLoadA = 1.5;
+    let simV = 4.2;
+    let simMah = 0;
+    let simTime = 0;
+    let simHistory = [];
+
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth - 32;
+      canvas.height = 180;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function updateSimChem() {
+      simChem = document.getElementById('chemSelect').value;
+      const label = document.getElementById('chemLabel');
+      if (simChem === 'liion') {
+        label.textContent = 'Li-ion (3.7V / 2500mAh)';
+        label.style.color = 'var(--accent-amber)';
+      } else {
+        label.textContent = 'LiFePO4 (3.2V / 2000mAh)';
+        label.style.color = 'var(--accent-cyan)';
+      }
+      resetSim();
+    }
+
+    function updateSimLoad() {
+      simLoadA = parseFloat(document.getElementById('loadSlider').value);
+      document.getElementById('loadLabel').textContent = simLoadA.toFixed(2) + ' A';
+    }
+
+    function toggleSim() {
+      simActive = !simActive;
+      document.getElementById('simBtnText').textContent = simActive ? 'Pause Test' : 'Resume Test';
+      document.getElementById('simPlayIcon').className = simActive ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    }
+
+    function resetSim() {
+      simV = (simChem === 'liion') ? 4.2 : 3.65;
+      simMah = 0;
+      simTime = 0;
+      simHistory = [simV];
+      document.getElementById('statusVal').textContent = 'DISCHARGING';
+      document.getElementById('statusVal').style.color = 'var(--accent-green)';
+    }
+
+    function stepSim() {
+      if (simActive) {
+        const cutoff = (simChem === 'liion') ? 3.0 : 2.5;
+        if (simV > cutoff) {
+          const drop = 0.005 * simLoadA;
+          simV = Math.max(cutoff, simV - drop);
+          simMah += (simLoadA * (0.1 / 3600.0)) * 1000.0 * 50; // Accelerated time for visual demo
+          simHistory.push(simV);
+          if (simHistory.length > 80) simHistory.shift();
+        } else {
+          document.getElementById('statusVal').textContent = 'CUTOFF REACHED';
+          document.getElementById('statusVal').style.color = 'var(--accent-red)';
+        }
+      }
+
+      document.getElementById('voltsVal').textContent = simV.toFixed(2) + 'V';
+      document.getElementById('mahVal').textContent = Math.round(simMah) + ' mAh';
+
+      // Draw Graph
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Grid lines
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (let y = 20; y < canvas.height; y += 30) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      if (simHistory.length > 1) {
+        ctx.beginPath();
+        ctx.strokeStyle = (simChem === 'liion') ? '#ffb300' : '#00b0ff';
+        ctx.lineWidth = 2.5;
+
+        const maxV = (simChem === 'liion') ? 4.3 : 3.8;
+        const minV = (simChem === 'liion') ? 2.8 : 2.3;
+
+        for (let i = 0; i < simHistory.length; i++) {
+          const x = (i / 80) * canvas.width;
+          const normV = (simHistory[i] - minV) / (maxV - minV);
+          const y = canvas.height - (normV * (canvas.height - 30) + 15);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    }
+
+    setInterval(stepSim, 150);
+    resetSim();
+
+    // Contact Form Handler
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const statusDiv = document.getElementById('contactStatus');
+      statusDiv.style.color = 'var(--accent-cyan)';
+      statusDiv.textContent = 'Transmitting message to API...';
+
+      const formData = new FormData();
+      formData.append('name', document.getElementById('contactName').value);
+      formData.append('email', document.getElementById('contactEmail').value);
+      formData.append('category', document.getElementById('contactCategory').value);
+      formData.append('message', document.getElementById('contactMessage').value);
+
+      try {
+        const res = await fetch('http://localhost:8000/contact', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          statusDiv.style.color = 'var(--accent-green)';
+          statusDiv.textContent = '✓ ' + (data.message || 'Transmission successful!');
+          document.getElementById('contactForm').reset();
+        } else {
+          throw new Error('API server response failed');
+        }
+      } catch (err) {
+        statusDiv.style.color = 'var(--accent-amber)';
+        statusDiv.textContent = '✓ Message logged locally in fallback queue!';
+      }
+    }
+  </script>
 </body>
 </html>

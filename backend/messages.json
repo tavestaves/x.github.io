@@ -5,5 +5,12 @@
     "category": "collaboration",
     "message": "Interested in deploying your custom embedded RF and ESP32 battery tester hardware designs.",
     "timestamp": "2026-09-16T11:25:18.596325"
+  },
+  {
+    "name": "Test User",
+    "email": "test@example.com",
+    "category": "General",
+    "message": "Automated verification test",
+    "timestamp": "2026-09-16T12:06:49.315222"
   }
 ]
